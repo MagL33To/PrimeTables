@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using PrimeTables.Code.Interfaces;
 
 namespace PrimeTables.Controllers
@@ -15,9 +11,14 @@ namespace PrimeTables.Controllers
         {
             _primeGenerator = primeGenerator;
         }
-        public ActionResult Index()
+        public ViewResult Index()
         {
             return View();
+        }
+
+        public JsonResult GetPrimes(int count)
+        {
+            return Json(_primeGenerator.GenerateNumberOfPrimes(count));
         }
     }
 }
