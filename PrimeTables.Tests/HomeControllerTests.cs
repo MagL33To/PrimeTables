@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
@@ -46,6 +47,20 @@ namespace PrimeTables.Tests
             var result = _fakeHomeController.GetPrimes(count);
 
             Assert.That(result.Data, Is.Not.Null);
+        }
+
+        [Test]
+        public void GetPrimes_ValidIntegerSupplied_ListOfIntegerListsReturned()
+        {
+            const int count = 5;
+            var list = Enumerable.Range(0, count).ToList();
+
+            _fakePrimeGenerator.Setup(x => x.GenerateNumberOfPrimes(It.IsAny<int>()))
+                .Returns(list);
+
+            var result = _fakeHomeController.GetPrimes(count);
+
+            Assert.AreEqual(result.Data.GetType(), typeof(List<List<int>>));
         }
     }
 }

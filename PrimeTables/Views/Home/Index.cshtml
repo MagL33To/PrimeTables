@@ -3,5 +3,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div ng-controller="PrimeController">
+    <h2>Index</h2>
 
+    <input type="text" ng-model="numPrimes" /><button id="submitPrimes" ng-click="getPrimesButton()">Get Prime Table</button>
+    <table class="table table-bordered">
+        <tr ng-repeat="column in primeColumns">
+            <td ng-repeat="prime in column">{{prime}}</td>
+        </tr>
+    </table>
+</div>
